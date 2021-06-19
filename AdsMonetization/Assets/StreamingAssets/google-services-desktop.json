@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "10505104995",
+    "project_id": "madesign-d4087",
+    "storage_bucket": "madesign-d4087.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:10505104995:android:cff1f314c2344cdd9bd256",
+        "android_client_info": {
+          "package_name": "com.ma.design"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "10505104995-h0jv0tspo6nfnrsa31bb36pvpvo24u94.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAh_3j34yO_crUQv0Rbmo1KSQpfvnXuqt0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "10505104995-h0jv0tspo6nfnrsa31bb36pvpvo24u94.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "10505104995-6lme7akfb7m2ih2188lceo4c1mfkcbdq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ma.design"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
