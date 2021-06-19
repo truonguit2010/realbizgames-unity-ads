@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 namespace RealbizGames.Ads
 {
     public class ISRewardedAdController : IRewardedAd
@@ -6,6 +7,13 @@ namespace RealbizGames.Ads
         private RewardedAdDTO rewardedAdDTO;
         private bool isCallRewarded = false;
         private bool isCallClose = false;
+
+        private RewardedAdConfig config;
+
+        public ISRewardedAdController(RewardedAdConfig config)
+        {
+            this.config = config;
+        }
 
         public void Init()
         {

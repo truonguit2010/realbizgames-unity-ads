@@ -9,10 +9,14 @@ namespace RealbizGames.Ads
 
         void ShowInterstitialAd();
 
+        bool isInterstitialAdAvailable();
+
         void ShowBanner();
 
         void Update();
 
         void Destroy();
+
+        System.DateTime lastVideoAdCloseTime { get; }
     }
 }

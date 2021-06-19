@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿
 namespace RealbizGames.Ads
 {
     public class AdNotificationCenter

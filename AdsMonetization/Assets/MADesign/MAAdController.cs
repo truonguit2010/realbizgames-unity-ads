@@ -199,7 +199,7 @@ namespace MADesign
             {
                 Destroy(this.gameObject);
             }
-        }
+        } 
 
         public static void userBuyVIPRemoveAdPackage() {
             MAPlayerPrefController.SetRemoveAds();

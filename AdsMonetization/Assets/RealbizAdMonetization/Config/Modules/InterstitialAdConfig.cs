@@ -3,8 +3,8 @@ namespace RealbizGames.Ads
 {
     public class InterstitialAdConfig
     {
-        public float reloadInterval;
+        public float reloadIntervalSeconds = 30;
 
-        public float restrictInterval;
+        public float restrictIntervalSeconds;
     }
 }

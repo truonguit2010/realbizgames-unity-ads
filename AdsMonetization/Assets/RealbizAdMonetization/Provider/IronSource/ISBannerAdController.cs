@@ -1,8 +1,20 @@
-﻿
+﻿using System;
+
 namespace RealbizGames.Ads
 {
     public class ISBannerAdController : IBannerAd
     {
+
+        private BannerAdConfig config;
+
+        private DateTime lastRequestBannerAdTime = DateTime.Now;
+        private double bannerUpdateIntervalCounter;
+
+        public ISBannerAdController(BannerAdConfig config)
+        {
+            this.config = config;
+        }
+
         public void Init()
         {
             //Invoked when the banner loading process has failed.
@@ -18,6 +30,8 @@ namespace RealbizGames.Ads
             //IronSourceEvents.onBannerAdScreenDismissedEvent += bann;
             //Invoked when the user leaves the app
             IronSourceEvents.onBannerAdLeftApplicationEvent += Banner_OnAdLeavingApplication_5;
+
+            lastRequestBannerAdTime = DateTime.Now;
         }
 
         public void ShowBanner()
@@ -33,7 +47,15 @@ namespace RealbizGames.Ads
 
         public void Update()
         {
-            
+            bannerUpdateIntervalCounter = DateTime.Now.Subtract(lastRequestBannerAdTime).TotalSeconds;
+            if (bannerUpdateIntervalCounter >= config.reloadIntervalSeconds || bannerUpdateIntervalCounter < 0)
+            {
+                // Có trường hợp nhỏ hơn 0 khi user cheat time.
+
+                // Update remote config data theo banner interval.
+                lastRequestBannerAdTime = DateTime.Now;
+                IronSource.Agent.loadBanner(IronSourceBannerSize.BANNER, config.isBottom ? IronSourceBannerPosition.BOTTOM : IronSourceBannerPosition.TOP);
+            }
         }
 
         public void Destroy()

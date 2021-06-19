@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
 
 namespace RealbizGames.Ads
 {
@@ -9,6 +7,8 @@ namespace RealbizGames.Ads
         private IBannerAd bannerAd;
         private IInterstitialAd interstitialAd;
         private IRewardedAd rewardedAd;
+
+        public DateTime lastVideoAdCloseTime => interstitialAd.lastInterstitialAdClosedTime;
 
         public void Destroy()
         {
@@ -19,13 +19,18 @@ namespace RealbizGames.Ads
 
         public void Init()
         {
-            bannerAd = new ISBannerAdController();
-            interstitialAd = new ISInterstitialAdController();
-            rewardedAd = new ISRewardedAdController();
+            bannerAd = new ISBannerAdController(Config.DefaultInstance.BannerAdConfig);
+            interstitialAd = new ISInterstitialAdController(Config.DefaultInstance.InterstitialAdConfig);
+            rewardedAd = new ISRewardedAdController(Config.DefaultInstance.RewardedAdConfig);
 
             bannerAd.Init();
             interstitialAd.Init();
             rewardedAd.Init();
+        }
+
+        public bool isInterstitialAdAvailable()
+        {
+            return interstitialAd.isAvailableAd();
         }
 
         public void ShowBanner()

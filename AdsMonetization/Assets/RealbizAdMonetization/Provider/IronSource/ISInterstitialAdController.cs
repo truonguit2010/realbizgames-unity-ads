@@ -1,9 +1,24 @@
-﻿
+﻿using System;
 
 namespace RealbizGames.Ads
 {
     public class ISInterstitialAdController : IInterstitialAd
     {
+
+        private InterstitialAdConfig config;
+
+        private double interstitialUpdateIntervalCounter;
+        private DateTime lastRequestInterstitialAdTime = DateTime.Now;
+
+        private DateTime _lastInterstitialAdClosedTime = DateTime.Now;
+
+        public DateTime lastInterstitialAdClosedTime => _lastInterstitialAdClosedTime;
+
+        public ISInterstitialAdController(InterstitialAdConfig config)
+        {
+            this.config = config;
+        }
+
         public void Destroy()
         {
             //Invoked when the Interstitial is Ready to shown after load function is called
@@ -22,6 +37,9 @@ namespace RealbizGames.Ads
             IronSourceEvents.onInterstitialAdOpenedEvent -= onInterstitialAdOpenedEvent;
             //Invoked when the interstitial ad closed and the user goes back to the application screen.
             IronSourceEvents.onInterstitialAdClosedEvent -= onInterstitialAdClosedEvent;
+
+
+            lastRequestInterstitialAdTime = DateTime.Now;
         }
 
         public void Init()
@@ -51,9 +69,19 @@ namespace RealbizGames.Ads
             IronSource.Agent.showInterstitial();
         }
 
+        public bool isAvailableAd()
+        {
+            return IronSource.Agent.isInterstitialReady();
+        }
+
         public void Update()
         {
-            
+            interstitialUpdateIntervalCounter = DateTime.Now.Subtract(lastRequestInterstitialAdTime).TotalSeconds;
+            if (interstitialUpdateIntervalCounter >= config.reloadIntervalSeconds || interstitialUpdateIntervalCounter < 0)
+            {
+                lastRequestInterstitialAdTime = DateTime.Now;
+                IronSource.Agent.loadInterstitial();
+            }
         }
 
         // -------------------------------------------------------------
@@ -71,6 +99,7 @@ namespace RealbizGames.Ads
 
         private void onInterstitialAdClosedEvent()
         {
+            _lastInterstitialAdClosedTime = DateTime.Now;
             AdNotificationCenter.Instance.InterstitialNotification.onInterstitialAdClosedEvent.Invoke();
         }
 
@@ -93,6 +122,7 @@ namespace RealbizGames.Ads
             InterstitialFailedToShowDTO dto = new InterstitialFailedToShowDTO(code: e.getCode().ToString(), message: e.getDescription());
             AdNotificationCenter.Instance.InterstitialNotification.onInterstitialAdShowFailedEvent.Invoke(dto);
         }
+
         #endregion
     }
 }
