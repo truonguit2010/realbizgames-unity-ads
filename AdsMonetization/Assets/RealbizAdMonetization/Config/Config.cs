@@ -18,17 +18,23 @@ namespace RealbizGames.Ads
         public InterstitialAdConfig InterstitialAdConfig { get => _interstitialAdConfig; set => _interstitialAdConfig = value; }
         public RewardedAdConfig RewardedAdConfig { get => _rewardedAdConfig; set => _rewardedAdConfig = value; }
         public BackToGameAdConfig BackToGameAdConfig { get => _backToGameAdConfig; set => _backToGameAdConfig = value; }
+        public ISConfig IsConfig { get => _isConfig; set => _isConfig = value; }
 
         private BannerAdConfig _bannerAdConfig;
         private InterstitialAdConfig _interstitialAdConfig;
         private RewardedAdConfig _rewardedAdConfig;
         private BackToGameAdConfig _backToGameAdConfig;
 
+        private ISConfig _isConfig;
+
+        public Provider provider = Provider.IronSource;
+
         private Config() {
             BannerAdConfig = new BannerAdConfig();
             InterstitialAdConfig = new InterstitialAdConfig();
             RewardedAdConfig = new RewardedAdConfig();
             _backToGameAdConfig = new BackToGameAdConfig();
+            _isConfig = new ISConfig();
         }
 
 

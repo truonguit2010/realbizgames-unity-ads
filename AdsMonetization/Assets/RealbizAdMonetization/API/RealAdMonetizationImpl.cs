@@ -7,9 +7,25 @@ namespace RealbizGames.Ads
     {
         const string TAG = "RealAdMonetizationImpl";
 
+        private static RealAdMonetizationImpl _defaultInstance;
+
+        public static RealAdMonetizationImpl DefaultInstance
+        {
+            get
+            {
+                if (_defaultInstance == null)
+                {
+                    _defaultInstance = new RealAdMonetizationImpl();
+                }
+                return _defaultInstance;
+            }
+        }
+
         private DateTime _back2GameTime = DateTime.Now;
 
         private IAdProvider provider;
+
+
 
         public void Destroy()
         {
@@ -26,10 +42,13 @@ namespace RealbizGames.Ads
 
         public void OnApplicationResume()
         {
-            if (Config.DefaultInstance.BackToGameAdConfig.enable) {
+            if (Config.DefaultInstance.BackToGameAdConfig.enable)
+            {
                 double interval = DateTime.Now.Subtract(_back2GameTime).TotalSeconds;
-                if (interval >= Config.DefaultInstance.BackToGameAdConfig.restrictIntervalSeconds) {
-                    if (provider.isInterstitialAdAvailable()) {
+                if (interval >= Config.DefaultInstance.BackToGameAdConfig.restrictIntervalSeconds)
+                {
+                    if (provider.isInterstitialAdAvailable())
+                    {
                         _back2GameTime = DateTime.Now;
                         ShowInterstitialAd();
                     }
@@ -45,9 +64,12 @@ namespace RealbizGames.Ads
         public void ShowInterstitialAd()
         {
             double interval = DateTime.Now.Subtract(provider.lastVideoAdCloseTime).TotalSeconds;
-            if (interval >= Config.DefaultInstance.InterstitialAdConfig.restrictIntervalSeconds) {
+            if (interval >= Config.DefaultInstance.InterstitialAdConfig.restrictIntervalSeconds)
+            {
                 provider.ShowInterstitialAd();
-            } else {
+            }
+            else
+            {
                 Debug.LogFormat("{0} - ShowInterstitialAd Ignore by restrictIntervalSeconds {1}", TAG, Config.DefaultInstance.InterstitialAdConfig.restrictIntervalSeconds);
             }
         }
@@ -59,7 +81,10 @@ namespace RealbizGames.Ads
 
         public void Update()
         {
-            provider.Update();
+            if (provider != null)
+            {
+                provider.Update();
+            }
         }
     }
 }
