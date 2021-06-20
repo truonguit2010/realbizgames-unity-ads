@@ -14,6 +14,8 @@ namespace RealbizGames.Ads
 
         public DateTime lastInterstitialAdClosedTime => _lastInterstitialAdClosedTime;
 
+        private InterstitialDTO interstitialDTO;
+
         public ISInterstitialAdController(InterstitialAdConfig config)
         {
             this.config = config;
@@ -64,8 +66,9 @@ namespace RealbizGames.Ads
 
         }
 
-        public void ShowInterstitial()
+        public void ShowInterstitial(InterstitialDTO dto)
         {
+            this.interstitialDTO = dto;
             IronSource.Agent.showInterstitial();
         }
 
@@ -100,7 +103,7 @@ namespace RealbizGames.Ads
         private void onInterstitialAdClosedEvent()
         {
             _lastInterstitialAdClosedTime = DateTime.Now;
-            AdNotificationCenter.Instance.InterstitialNotification.onInterstitialAdClosedEvent.Invoke();
+            AdNotificationCenter.Instance.InterstitialNotification.onInterstitialAdClosedEvent.Invoke(this.interstitialDTO);
         }
 
         private void onInterstitialAdShowSucceededEvent()

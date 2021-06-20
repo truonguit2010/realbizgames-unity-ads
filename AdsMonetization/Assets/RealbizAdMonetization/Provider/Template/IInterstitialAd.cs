@@ -5,7 +5,7 @@ namespace RealbizGames.Ads
     public interface IInterstitialAd
     {
         void Init();
-        void ShowInterstitial();
+        void ShowInterstitial(InterstitialDTO dto);
         bool isAvailableAd();
         void Update();
         void Destroy();

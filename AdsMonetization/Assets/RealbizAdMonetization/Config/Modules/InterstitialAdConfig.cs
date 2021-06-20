@@ -5,6 +5,8 @@ namespace RealbizGames.Ads
     {
         public float reloadIntervalSeconds = 30;
 
-        public float restrictIntervalSeconds;
+        public float restrictIntervalSeconds = 5.0f;
+
+        public bool enable = true;
     }
 }

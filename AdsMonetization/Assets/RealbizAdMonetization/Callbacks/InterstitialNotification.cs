@@ -21,7 +21,7 @@ namespace RealbizGames.Ads
     public class OnInterstitialAdOpenedEvent : UnityEvent { };
 
     [System.Serializable]
-    public class OnInterstitialAdClosedEvent : UnityEvent { };
+    public class OnInterstitialAdClosedEvent : UnityEvent<InterstitialDTO> { };
 
     public class InterstitialNotification
     {

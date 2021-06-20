@@ -7,11 +7,13 @@ namespace RealbizGames.Ads
 
         void ShowRewardedAd(RewardedAdDTO dto);
 
-        void ShowInterstitialAd();
+        void ShowInterstitialAd(InterstitialDTO dto);
 
         bool isInterstitialAdAvailable();
 
         void ShowBanner();
+
+        void HideBanner();
 
         void Update();
 

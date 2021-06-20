@@ -6,13 +6,15 @@ namespace RealbizGames.Ads
         void Init();
         void ShowRewardedAd(RewardedAdDTO dto);
 
-        void ShowInterstitialAd();
+        void ShowInterstitialAd(InterstitialDTO dto);
 
         void ShowBanner();
 
+        void HideBanner();
+
         void Update();
 
-        void OnApplicationResume();
+        void ShowAppOpenAd(InterstitialDTO dto);
 
         void Destroy();
     }

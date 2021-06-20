@@ -40,7 +40,7 @@ namespace RealbizGames.Ads
             _back2GameTime = DateTime.Now;
         }
 
-        public void OnApplicationResume()
+        public void ShowAppOpenAd(InterstitialDTO dto)
         {
             if (Config.DefaultInstance.BackToGameAdConfig.enable)
             {
@@ -50,7 +50,7 @@ namespace RealbizGames.Ads
                     if (provider.isInterstitialAdAvailable())
                     {
                         _back2GameTime = DateTime.Now;
-                        ShowInterstitialAd();
+                        ShowInterstitialAd(dto);
                     }
                 }
             }
@@ -58,19 +58,38 @@ namespace RealbizGames.Ads
 
         public void ShowBanner()
         {
-            provider.ShowBanner();
-        }
-
-        public void ShowInterstitialAd()
-        {
-            double interval = DateTime.Now.Subtract(provider.lastVideoAdCloseTime).TotalSeconds;
-            if (interval >= Config.DefaultInstance.InterstitialAdConfig.restrictIntervalSeconds)
+            if (Config.DefaultInstance.BannerAdConfig.enable)
             {
-                provider.ShowInterstitialAd();
+                provider.ShowBanner();
             }
             else
             {
-                Debug.LogFormat("{0} - ShowInterstitialAd Ignore by restrictIntervalSeconds {1}", TAG, Config.DefaultInstance.InterstitialAdConfig.restrictIntervalSeconds);
+                Debug.LogFormat("{0} - ShowBanner is not enable", TAG);
+            }
+        }
+
+        public void HideBanner()
+        {
+            provider.HideBanner();
+        }
+
+        public void ShowInterstitialAd(InterstitialDTO dto)
+        {
+            if (Config.DefaultInstance.InterstitialAdConfig.enable)
+            {
+                double interval = DateTime.Now.Subtract(provider.lastVideoAdCloseTime).TotalSeconds;
+                if (interval >= Config.DefaultInstance.InterstitialAdConfig.restrictIntervalSeconds)
+                {
+                    provider.ShowInterstitialAd(dto);
+                }
+                else
+                {
+                    Debug.LogFormat("{0} - ShowInterstitialAd Ignore by restrictIntervalSeconds {1}", TAG, Config.DefaultInstance.InterstitialAdConfig.restrictIntervalSeconds);
+                }
+            }
+            else
+            {
+                Debug.LogFormat("{0} - ShowInterstitialAd is not enable", TAG);
             }
         }
 
@@ -86,5 +105,6 @@ namespace RealbizGames.Ads
                 provider.Update();
             }
         }
+
     }
 }

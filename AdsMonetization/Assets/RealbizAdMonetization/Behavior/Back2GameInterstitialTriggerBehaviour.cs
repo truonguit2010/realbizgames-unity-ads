@@ -9,7 +9,8 @@ namespace RealbizGames.Ads
         {
             if (!pauseStatus)
             {
-                RealAdMonetizationImpl.DefaultInstance.OnApplicationResume();
+                InterstitialDTO dto = new InterstitialDTO("back2game");
+                RealAdMonetizationImpl.DefaultInstance.ShowAppOpenAd(dto);
             }
         }
     }

@@ -18,6 +18,8 @@ namespace RealbizGames.Ads
             rewardedAd.Destroy();
         }
 
+        
+
         public void Init()
         {
             Debug.Log("unity-script: IronSource.Agent.validateIntegration");
@@ -49,9 +51,14 @@ namespace RealbizGames.Ads
             bannerAd.ShowBanner();
         }
 
-        public void ShowInterstitialAd()
+        public void HideBanner()
         {
-            interstitialAd.ShowInterstitial();
+            bannerAd.HideBanner();
+        }
+
+        public void ShowInterstitialAd(InterstitialDTO dto)
+        {
+            interstitialAd.ShowInterstitial(dto);
         }
 
         public void ShowRewardedAd(RewardedAdDTO dto)
