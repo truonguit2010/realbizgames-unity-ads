@@ -47,14 +47,17 @@ namespace RealbizGames.Ads
 
         public void Update()
         {
-            bannerUpdateIntervalCounter = DateTime.Now.Subtract(lastRequestBannerAdTime).TotalSeconds;
-            if (bannerUpdateIntervalCounter >= config.reloadIntervalSeconds || bannerUpdateIntervalCounter < 0)
+            if (config.enable)
             {
-                // Có trường hợp nhỏ hơn 0 khi user cheat time.
+                bannerUpdateIntervalCounter = DateTime.Now.Subtract(lastRequestBannerAdTime).TotalSeconds;
+                if (bannerUpdateIntervalCounter >= config.reloadIntervalSeconds || bannerUpdateIntervalCounter < 0)
+                {
+                    // Có trường hợp nhỏ hơn 0 khi user cheat time.
 
-                // Update remote config data theo banner interval.
-                lastRequestBannerAdTime = DateTime.Now;
-                IronSource.Agent.loadBanner(IronSourceBannerSize.BANNER, config.isBottom ? IronSourceBannerPosition.BOTTOM : IronSourceBannerPosition.TOP);
+                    // Update remote config data theo banner interval.
+                    lastRequestBannerAdTime = DateTime.Now;
+                    IronSource.Agent.loadBanner(IronSourceBannerSize.BANNER, config.isBottom ? IronSourceBannerPosition.BOTTOM : IronSourceBannerPosition.TOP);
+                }
             }
         }
 
@@ -97,7 +100,7 @@ namespace RealbizGames.Ads
             AdNotificationCenter.Instance.BannerNotification.NotifyLeftApplicationEvent();
         }
 
-        
+
 
         #endregion
     }
