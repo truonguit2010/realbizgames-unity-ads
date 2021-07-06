@@ -1,10 +1,12 @@
 ﻿using System;
+using UnityEngine;
 
 namespace RealbizGames.Ads
 {
     public class ISBannerAdController : IBannerAd
     {
-
+        public const string TAG = "ISBannerAdController";
+        
         private BannerAdConfig config;
 
         private DateTime lastRequestBannerAdTime = DateTime.Now;
@@ -36,11 +38,14 @@ namespace RealbizGames.Ads
 
         public void ShowBanner()
         {
+            Debug.LogFormat("{0} - ShowBanner", TAG);
             IronSource.Agent.displayBanner();
         }
 
         public void HideBanner()
         {
+            Debug.LogFormat("{0} - HideBanner", TAG);
+
             IronSource.Agent.hideBanner();
             IronSource.Agent.destroyBanner();
         }
@@ -57,6 +62,7 @@ namespace RealbizGames.Ads
                     // Update remote config data theo banner interval.
                     lastRequestBannerAdTime = DateTime.Now;
                     IronSource.Agent.loadBanner(IronSourceBannerSize.BANNER, config.isBottom ? IronSourceBannerPosition.BOTTOM : IronSourceBannerPosition.TOP);
+                    Debug.LogFormat("{0} - LoadBanner {1}", TAG, config.enable);
                 }
             }
         }

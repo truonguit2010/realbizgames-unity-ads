@@ -38,7 +38,7 @@ namespace RealbizGames.Ads
 
             bannerAd.Init();
             interstitialAd.Init();
-            rewardedAd.Init();
+            rewardedAd.Init(); 
         }
 
         public bool isInterstitialAdAvailable()

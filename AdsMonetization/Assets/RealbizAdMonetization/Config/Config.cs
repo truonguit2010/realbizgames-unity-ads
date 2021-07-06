@@ -14,10 +14,10 @@ namespace RealbizGames.Ads
             }
         }
 
-        public BannerAdConfig BannerAdConfig { get => _bannerAdConfig; set => _bannerAdConfig = value; }
-        public InterstitialAdConfig InterstitialAdConfig { get => _interstitialAdConfig; set => _interstitialAdConfig = value; }
-        public RewardedAdConfig RewardedAdConfig { get => _rewardedAdConfig; set => _rewardedAdConfig = value; }
-        public BackToGameAdConfig BackToGameAdConfig { get => _backToGameAdConfig; set => _backToGameAdConfig = value; }
+        public BannerAdConfig BannerAdConfig { get => _bannerAdConfig; }
+        public InterstitialAdConfig InterstitialAdConfig { get => _interstitialAdConfig; }
+        public RewardedAdConfig RewardedAdConfig { get => _rewardedAdConfig; }
+        public BackToGameAdConfig BackToGameAdConfig { get => _backToGameAdConfig; }
         public ISConfig IsConfig { get => _isConfig; set => _isConfig = value; }
 
         private BannerAdConfig _bannerAdConfig;
@@ -30,9 +30,9 @@ namespace RealbizGames.Ads
         public Provider provider = Provider.IronSource;
 
         private Config() {
-            BannerAdConfig = new BannerAdConfig();
-            InterstitialAdConfig = new InterstitialAdConfig();
-            RewardedAdConfig = new RewardedAdConfig();
+            _bannerAdConfig = new BannerAdConfig();
+            _interstitialAdConfig = new InterstitialAdConfig();
+            _rewardedAdConfig = new RewardedAdConfig();
             _backToGameAdConfig = new BackToGameAdConfig();
             _isConfig = new ISConfig();
         }
